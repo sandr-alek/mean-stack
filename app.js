@@ -19,8 +19,12 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
-
 app.use(bodyParser.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
+
 app.use('/users', users);
 app.use(express.static(__dirname + '/public'));
 
