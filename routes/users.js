@@ -22,10 +22,10 @@ router.post('/register', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  const username = req.body.name;
+  const email = req.body.email;
   const password = req.body.password;
 
-  User.getUserByName(username, (err, user) => {
+  User.getUserByEmail(email, (err, user) => {
     if (err) throw err;
     if (!user) {
       return res.json({ success: false, msg: 'User not found' });

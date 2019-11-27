@@ -1,1 +1,15 @@
-<p>login-page works!</p>
+<h2 class="mb-4">Login Form</h2>
+<form (submit)="onLoginSubmit()">
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd" [(ngModel)]="password" name="password">
+  </div>
+  <div *ngIf="result.status" class="alert alert-danger">
+    {{ result.msg }}
+  </div>
+  <button type="submit" class="btn btn-success">Login</button>
+</form>
