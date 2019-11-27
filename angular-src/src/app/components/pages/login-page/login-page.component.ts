@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +15,8 @@ export class LoginPageComponent {
   };
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   onLoginSubmit() {
@@ -29,7 +31,8 @@ export class LoginPageComponent {
         this.result.msg = response.msg;
         return;
       }
-      this.authService.saveToken(response.token, response.user);
+      this.authService.saveToken(response.token);
+      this.router.navigate(['/']);
     });
   }
 

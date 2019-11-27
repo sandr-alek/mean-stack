@@ -10,21 +10,32 @@ export class AuthService {
 
   registerUser(user) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/register', user, { headers });
+    return this.http.post('http://localhost:3000/users/register', user, { headers: headers });
   }
 
   authenticateUser(user) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/login', user, { headers });
+    return this.http.post('http://localhost:3000/users/login', user, { headers: headers });
   }
 
-  saveToken(token, user) {
-    localStorage.setItem('mean:id_token', token);
-    localStorage.setItem('mean:user', JSON.stringify(user));
+  getProfile() {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get('http://localhost:3000/users/profile', { headers: headers });
+  }
+
+  saveToken(token) {
+    localStorage.setItem('mean:token', token);
+  }
+
+  loadToken() {
+    return localStorage.getItem('mean:token');
+  }
+
+  isAuthorized() {
+    return !!this.loadToken();
   }
 
   logout() {
-    localStorage.removeItem('mean:id_token');
-    localStorage.removeItem('mean:user');
+    localStorage.removeItem('mean:token');
   }
 }
